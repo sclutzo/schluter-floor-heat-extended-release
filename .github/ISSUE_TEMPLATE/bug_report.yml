@@ -1,0 +1,61 @@
+name: Bug report
+description: Report an issue with the unofficial Schluter Floor Heat Extended integration
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting an issue. **Please do not share** passwords, session
+        tokens, cookies, real thermostat serial numbers, private network addresses,
+        raw HAR files, or Home Assistant backups. Redact any logs before posting.
+        This is an unofficial integration and is not supported by Schluter Systems.
+  - type: input
+    id: ha_version
+    attributes:
+      label: Home Assistant version
+      description: Example 2026.11.1
+      placeholder: "2026.11.1"
+    validations:
+      required: true
+  - type: input
+    id: integration_version
+    attributes:
+      label: Schluter Floor Heat Extended version
+      placeholder: "1.1.0b1"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected feature
+      options:
+        - Integration setup or login
+        - Thermostat controls
+        - Schedule read or write
+        - Energy reports or Recorder
+        - Optional dashboard cards
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should happen?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and reproduction steps
+      description: Describe the issue without including personal or device identifiers.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant redacted logs (optional)
+      description: Only include sanitized excerpts. Do not upload raw captures or backup archives.
+      render: text
+    validations:
+      required: false

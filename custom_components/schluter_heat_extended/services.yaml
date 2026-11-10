@@ -1,0 +1,144 @@
+inspect_time_settings:
+  name: Inspect thermostat time setting field names
+  description: >-
+    Developer-only read-only diagnostic for a selected Schluter thermostat.
+    Returns restricted time-related field names and data types, never values,
+    passwords, identifiers, locations, or session information. Optional
+    locations inspection performs read-only GET requests and may refresh the login session; no thermostat settings are changed.
+  target:
+    entity:
+      integration: schluter_heat_extended
+      domain: climate
+  fields:
+    include_locations:
+      name: Inspect locations API
+      description: >-
+        Optional read-only GET of the account locations endpoint (with retry on authorization failure). Inspect only
+        time-related field names and types. Results are account-level, not
+        verified for the selected thermostat.
+      default: false
+      selector:
+        boolean:
+
+get_energy_statistics_status:
+  name: Get thermostat energy statistics status
+  description: >-
+    Read the tracking start, known consumption, missing hours, DST gaps and
+    Recorder publication status for each discovered Schluter thermostat. Does not request energy reports or change thermostat settings.
+    Each thermostat uses schluter_heat_extended:energy_<serial>, in kWh.
+  fields: {}
+
+get_energy_report:
+  name: Get energy report
+  description: >-
+    Read Day, Week, Month, or Year consumption for exactly one Schluter climate
+    entity. Month uses daily values from weekly reports. No thermostat settings
+    change. Missing history and all-zero ambiguous responses are identified.
+    Uses the existing active session and a persistent report cache.
+  target:
+    entity:
+      integration: schluter_heat_extended
+      domain: climate
+  fields:
+    view:
+      name: Reporting view
+      required: true
+      selector:
+        select:
+          options: [day, week, month, year]
+    date:
+      name: Reporting date
+      description: YYYY-MM-DD for Day/Week/Month, or YYYY for Year.
+      required: true
+      example: "2026-10-25"
+      selector:
+        text:
+    refresh:
+      name: Refresh cached report
+      description: Recheck this period with Schluter; cached history remains available on errors.
+      default: false
+      selector:
+        boolean:
+
+get_schedule:
+  name: Get weekly schedule
+  description: >-
+    Read the complete weekly schedule for exactly one Schluter climate entity.
+    Refreshes thermostat data and returns all seven days and six event slots,
+    including inactive events. Original TempFloor values are hundredths of Celsius.
+    Includes thermostat temperature and website event-time limits when available;
+    missing limits leave the schedule viewer read-only.
+    This action does not change the thermostat or its schedule.
+  target:
+    entity:
+      integration: schluter_heat_extended
+      domain: climate
+  fields: {}
+
+save_schedule:
+  name: Save weekly schedule
+  description: >-
+    Save a complete seven-day schedule for exactly one Schluter thermostat. Requires the
+    original editor snapshot for conflict detection. Validates actual device
+    limits, posts only Schedules, and returns acknowledgement and readback status.
+    TempFloor values use hundredths of Celsius; untouched raw values must be retained.
+  target:
+    entity:
+      integration: schluter_heat_extended
+      domain: climate
+  fields:
+    schedules:
+      name: Proposed weekly schedule
+      required: true
+      selector:
+        object:
+    original_schedules:
+      name: Original weekly schedule
+      description: Unmodified complete Schedules array returned when opening the editor.
+      required: true
+      selector:
+        object:
+
+set_temporary_temperature:
+  name: Set temporary temperature
+  description: >-
+    Set a comfort temperature until an explicit expiration. Select exactly one
+    Schluter climate entity. Ordinary climate.set_temperature still expires at
+    the next scheduled transition.
+  target:
+    entity:
+      integration: schluter_heat_extended
+      domain: climate
+  fields:
+    temperature:
+      name: Target temperature
+      description: Temperature in Home Assistant's configured display units.
+      required: true
+      example: 73
+      selector:
+        number:
+          mode: box
+          step: 0.1
+    expires_at:
+      name: Override expiration
+      description: >-
+        Future ISO 8601 timestamp with an explicit UTC offset or Z, at whole-minute
+        precision. For example, 2026-11-01T21:30:00-05:00. Local times without an
+        offset are rejected.
+      required: true
+      example: "2026-11-01T21:30:00-05:00"
+      selector:
+        text:
+
+return_to_schedule:
+  name: Return to schedule
+  description: >-
+    Restore the thermostat's programmed heating schedule. Select exactly one
+    Schluter climate entity. Preserve the vacation setting unless leaving active
+    vacation mode, in which case vacation is disabled. Schedule definitions are
+    not changed.
+  target:
+    entity:
+      integration: schluter_heat_extended
+      domain: climate
+  fields: {}

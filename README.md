@@ -29,7 +29,7 @@ For a manual installation, copy only `custom_components/schluter_heat_extended/`
 
 Do **not** simultaneously enable the built-in `schluter:` integration or an older YAML configuration of `schluter_heat_extended:`. For a migration, preserve `/config/.storage/`, Recorder history and the original per-device external statistic ID; do not delete and re-add the integration simply to upgrade.
 
-**Marketplace custom-repository testing** will be performed only after this clean-history repository is explicitly approved for public visibility and has a tagged beta release. Being available as a custom repository is not the same as acceptance into the official Marketplace catalog.
+**Marketplace custom-repository testing** will be performed only after this clean-history repository is explicitly approved for public visibility and has a tagged beta release. Being available as a custom repository is not the same as acceptance into the official Marketplace catalog. The [safe VM testing plan](docs/MARKETPLACE_TEST_PLAN.md) covers that process.
 
 ## Optional thermostat dashboards
 
@@ -48,7 +48,7 @@ Live beta testing on Home Assistant 2026.11 confirmed UI account setup, both the
 
 ## License, upstream code and support
 
-This project contains modifications based on the Apache-2.0 Home Assistant Core Schluter integration and the MIT-licensed `py-schluter` project. See [LICENSE](LICENSE), [NOTICE](NOTICE), and [LICENSES/](LICENSES/). Original project contributions use Apache-2.0. The separate artwork is an unofficial project design.
+This project contains modifications based on the Apache-2.0 Home Assistant Core Schluter integration and the MIT-licensed `py-schluter` project. See [LICENSE](LICENSE), [NOTICE](NOTICE), and [LICENSES/](LICENSES/). Original project contributions use Apache-2.0. The separate artwork is an unofficial project design. Development and documentation included AI-assisted work; the maintainer remains responsible for reviewing, testing, licensing, and releasing the integration.
 
 Use the [Issues](../../issues) page for reproducible reports after the repository becomes public. Include Home Assistant and integration version, redacted relevant logs and reproduction steps. **Never include secrets or serial numbers.**
 

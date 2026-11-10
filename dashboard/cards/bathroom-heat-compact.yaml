@@ -1,0 +1,192 @@
+# Adjustable dashboard width using Home Assistant's built-in Grid card.
+# columns: 2 = thermostat about half width (recommended);
+# columns: 1 = full width; columns: 3 = roughly one-third but may be cramped.
+# IMPORTANT: choose columns here, not grid_options on picture-elements.
+type: grid
+columns: 2
+square: false
+cards:
+  - type: picture-elements
+    image: /local/Thermostat.svg
+    elements:
+      # ResizeObserver measures the SVG faceplate container; text sizes
+      # use ratios of that width instead of fixed pixels.
+      - type: custom:bathroom-heat-scaler
+        font_scale: 1.0
+        style:
+          top: 0%
+          left: 0%
+          pointer-events: none
+      - type: custom:bathroom-heat-status
+        service_domain: schluter_heat_extended
+        entity: climate.bath_heat_2
+        field: clock
+        compact: true
+        style:
+          top: 24%
+          left: 50%
+          transform: translate(-50%, -50%)
+          font-size: var(--bath-heat-clock, 12px)
+          font-weight: 400
+          color: '#111'
+      - type: custom:bathroom-heat-status
+        service_domain: schluter_heat_extended
+        entity: climate.bath_heat_2
+        field: current
+        compact: true
+        style:
+          top: 27%
+          left: 50%
+          transform: translate(-50%, -50%)
+          font-size: var(--bath-heat-current, 12px)
+          font-weight: 420
+          color: '#111'
+      - type: custom:bathroom-heat-target
+        service_domain: schluter_heat_extended
+        entity: climate.bath_heat_2
+        style:
+          top: 40%
+          left: 36%
+          transform: translate(-50%, -50%)
+          font-size: var(--bath-heat-target, 32px)
+          font-weight: 450
+          color: '#111'
+      - type: icon
+        icon: mdi:temperature-fahrenheit
+        style:
+          top: 38%
+          left: 48%
+          transform: translate(-50%, -50%)
+          font-size: var(--bath-heat-action, 11px)
+          color: '#111'
+      - type: state-label
+        entity: climate.bath_heat_2
+        attribute: hvac_action
+        style:
+          top: 56%
+          left: 50%
+          transform: translate(-50%, -50%)
+          font-size: var(--bath-heat-action, 11px)
+          line-height: 1.1
+          color: '#333'
+      - type: custom:bathroom-heat-status
+        service_domain: schluter_heat_extended
+        entity: climate.bath_heat_2
+        field: mode
+        style:
+          top: 50%
+          left: 36%
+          transform: translate(-50%, -50%)
+          font-size: var(--bath-heat-mode, 11px)
+          line-height: 1.1
+          color: '#333'
+      - type: custom:bathroom-heat-status
+        service_domain: schluter_heat_extended
+        entity: climate.bath_heat_2
+        field: expiration
+        compact: true
+        style:
+          top: 59%
+          left: 50%
+          transform: translate(-50%, -50%)
+          font-size: var(--bath-heat-next, 10px)
+          line-height: 1.1
+          width: 68%
+          text-align: center
+          color: '#555'
+      - type: icon
+        icon: mdi:arrow-up-bold
+        tap_action:
+          action: fire-dom-event
+          bathroom_heat:
+            entity: climate.bath_heat_2
+            action: step
+            step: 1
+        style:
+          top: 39%
+          left: 65%
+          width: var(--bath-heat-arrow-width, 38px)
+          height: var(--bath-heat-arrow-height, 21px)
+          display: flex
+          align-items: center
+          justify-content: center
+          transform: translate(-50%, -50%)
+          font-size: var(--bath-heat-arrow-icon, 17px)
+          color: '#333'
+          iron-icon-width: var(--bath-heat-arrow-icon, 17px)
+          iron-icon-height: var(--bath-heat-arrow-icon, 17px)
+          background: '#d9d9d9'
+          border-radius: 6px
+          padding: var(--bath-heat-arrow-padding, 3px)
+          border: 2px solid rgba(0,0,0,0.25)
+          box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 2px 6px rgba(0,0,0,0.15)
+      - type: icon
+        icon: mdi:arrow-down-bold
+        tap_action:
+          action: fire-dom-event
+          bathroom_heat:
+            entity: climate.bath_heat_2
+            action: step
+            step: -1
+        style:
+          top: 47%
+          left: 65%
+          transform: translate(-50%, -50%)
+          font-size: var(--bath-heat-arrow-icon, 17px)
+          width: var(--bath-heat-arrow-width, 38px)
+          height: var(--bath-heat-arrow-height, 21px)
+          color: '#333'
+          outline: black
+          background: '#d9d9d9'
+          display: flex
+          align-items: center
+          justify-content: center
+          border-radius: 6px
+          padding: var(--bath-heat-arrow-padding, 3px)
+          border: 2px solid rgba(0,0,0,0.25)
+          box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 2px 6px rgba(0,0,0,0.15)
+      - type: image
+        image: /local/Adjust.svg
+        tap_action:
+          action: fire-dom-event
+          bathroom_heat:
+            entity: climate.bath_heat_2
+            action: adjust
+        style:
+          top: 65%
+          left: 50%
+          width: 50%
+          transform: translate(-50%, -50%)
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: climate.bath_heat_2
+            attribute: override_active
+            state: 'true'
+        elements:
+          - type: image
+            image: /local/ReturnToSchedule.svg
+            tap_action:
+              action: fire-dom-event
+              bathroom_heat:
+                entity: climate.bath_heat_2
+                action: return_to_schedule
+            style:
+              top: 72%
+              left: 50%
+              width: 50%
+              transform: translate(-50%, -50%)
+      # Image matches Adjust.svg's viewBox (164 × 33) and 50% width.
+      # No Home Assistant native button/theme minimum height can affect it.
+      - type: image
+        image: /local/EditSchedule.svg
+        tap_action:
+          action: fire-dom-event
+          bathroom_heat:
+            entity: climate.bath_heat_2
+            action: schedule
+        style:
+          top: 85%
+          left: 50%
+          width: 50%
+          transform: translate(-50%, -50%)

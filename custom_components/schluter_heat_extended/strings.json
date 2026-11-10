@@ -1,0 +1,58 @@
+{
+  "title": "Schluter Floor Heat Extended",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect Schluter account",
+        "description": "Sign in to your Schluter DITRA-HEAT Wi-Fi account. Thermostat timezones are configured separately after setup.",
+        "data": {
+          "username": "Email",
+          "password": "Password"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Reconnect Schluter account",
+        "description": "Re-enter the password for the existing Schluter account. This does not change its devices or energy history.",
+        "data": {
+          "password": "New password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect to Schluter. Try again later.",
+      "invalid_auth": "Schluter rejected these credentials.",
+      "invalid_account": "Enter a valid account email address."
+    },
+    "abort": {
+      "yaml_active": "This integration is already active through YAML. The UI migration is not yet complete; keep using the existing setup.",
+      "single_instance_allowed": "Only one Schluter account can currently be configured.",
+      "already_configured": "This Schluter account is already configured.",
+      "unique_id_mismatch": "Reauthentication must use the account already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Choose thermostat",
+        "description": "Select the thermostat whose timezone you want to configure.",
+        "data": {
+          "thermostat": "Thermostat"
+        }
+      },
+      "timezone": {
+        "title": "Set thermostat timezone",
+        "description": "Select the IANA timezone for {device_name}. This choice affects the interpretation of future hourly energy reports, so existing history will not be silently remapped.",
+        "data": {
+          "time_zone": "Thermostat timezone"
+        }
+      }
+    },
+    "error": {
+      "unknown_device": "The selected thermostat is no longer available.",
+      "invalid_timezone": "Choose a valid timezone."
+    },
+    "abort": {
+      "devices_unavailable": "No thermostat list is available yet. Check the integration connection and try again."
+    }
+  }
+}

@@ -1,0 +1,26 @@
+name: Offline integration validation
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install offline test dependencies
+        run: python -m pip install requests PyYAML
+      - name: Validate Python syntax
+        run: python -m compileall -q custom_components/schluter_heat_extended
+      - name: Validate dashboard JavaScript syntax
+        run: |
+          node --check dashboard/www/bathroom-heat-controls.js
+          node --check dashboard/www/bathroom-heat-energy.js
+          node dashboard/tests/test_faceplate_sizing.cjs
+      - name: Run offline regression tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v

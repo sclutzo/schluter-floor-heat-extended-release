@@ -1,0 +1,17 @@
+name: Home Assistant hassfest
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hassfest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate custom integration
+        uses: home-assistant/actions/hassfest@master

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
+<title id="title">Schluter Floor Heat Extended</title><desc id="desc">Unofficial Home Assistant integration logo with a white house, thermostat and glowing orange floor heat on a dark background.</desc>
+<defs>
+  <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#17181d"/><stop offset="1" stop-color="#28282d"/></linearGradient>
+  <linearGradient id="hot" x2="1" y2=".2"><stop stop-color="#ffb035"/><stop offset="1" stop-color="#ff6e0d"/></linearGradient>
+  <linearGradient id="floor" x2="0" y2="1"><stop stop-color="#373332"/><stop offset="1" stop-color="#17171b"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1200" height="320" rx="28" fill="url(#bg)"/>
+<rect x="29" y="26" width="264" height="268" rx="62" stroke="#fb8617" stroke-width="9" fill="#1b1c21"/>
+<path d="M72 151L162 64L257 151 M96 132V234 M232 130V234 M216 105V81H238V126" fill="none" stroke="#f9f9fb" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="122" y="138" width="84" height="63" rx="15" fill="#24262c" stroke="#f9f9fb" stroke-width="7"/>
+<text x="132" y="178" font-size="35" font-family="Arial,Helvetica,sans-serif" fill="#fff" font-weight="700">72°</text>
+<path d="M193 154l6-9 6 9" fill="#ff951b"/><path d="M193 181l6 9 6-9" fill="#26baf6"/>
+<path d="M137 221C126 205 146 200 137 186 M165 221C154 205 174 200 165 186 M191 221C180 205 200 200 191 186" stroke="url(#hot)" stroke-width="6" fill="none" stroke-linecap="round" opacity=".96"/>
+<path d="M78 259L103 237H225L251 259" fill="none" stroke="#f88e1a" stroke-width="8" stroke-linejoin="round"/>
+<path d="M107 250C151 230 215 255 182 260H119C108 261 110 271 139 270H228" stroke="url(#hot)" stroke-width="7" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+<text x="345" y="116" font-size="74" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#f9f9fb" letter-spacing="-2">Schluter Floor Heat</text>
+<path d="M354 146H444M865 146H1052" stroke="#ed851b" stroke-width="6" stroke-linecap="round"/>
+<text x="463" y="207" font-size="84" font-family="Arial,Helvetica,sans-serif" font-style="italic" font-weight="700" fill="#ff8c1a">Extended</text>
+<text x="354" y="271" font-size="27" font-family="Arial,Helvetica,sans-serif" fill="#dedede" letter-spacing="2">UNOFFICIAL HOME ASSISTANT INTEGRATION</text>
+</svg>

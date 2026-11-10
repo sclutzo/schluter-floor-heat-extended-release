@@ -1,0 +1,22 @@
+{
+  "domain": "schluter_heat_extended",
+  "name": "Schluter Floor Heat Extended",
+  "after_dependencies": [
+    "recorder"
+  ],
+  "categories": [
+    "climate.thermostats_heating"
+  ],
+  "codeowners": [
+    "@sclutzo"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/sclutzo/schluter-floor-heat-extended-release",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/sclutzo/schluter-floor-heat-extended-release/issues",
+  "loggers": [
+    "custom_components.schluter_heat_extended"
+  ],
+  "version": "1.1.0b1"
+}

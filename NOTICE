@@ -1,0 +1,48 @@
+Schluter Floor Heat Extended — Third-Party Attributions
+====================================================
+
+This repository is a modified, unofficial Home Assistant custom integration.
+It is not affiliated with, endorsed by, or supported by Schluter Systems or
+the Home Assistant project.
+
+Home Assistant Core Schluter integration
+---------------------------------------
+Source: https://github.com/home-assistant/core/tree/dev/homeassistant/components/schluter
+Copyright: respective Home Assistant Core contributors and copyright holders
+License: Apache License, Version 2.0
+License text: LICENSES/Apache-2.0.txt
+
+The integration setup and climate implementation in
+custom_components/schluter_heat_extended/__init__.py,
+custom_components/schluter_heat_extended/climate.py, and
+custom_components/schluter_heat_extended/const.py are modified from
+the Home Assistant Schluter integration. Changes include a separate
+integration domain, bundled API, expanded thermostat actions and
+weekly schedule handling, custom authentication behavior, and
+per-device energy reporting integration.
+
+py-schluter
+-----------
+Source: https://github.com/prairieapps/py-schluter
+Copyright (c) 2020 Adam Michaleski
+License: MIT License
+Complete original license text: LICENSES/MIT-py-schluter.txt
+
+The bundled files under
+custom_components/schluter_heat_extended/v_lib/
+are derived from and/or adaptations of the py-schluter project.
+These files have substantial modifications to authentication,
+thermostat data handling, schedule operations, temperature control,
+energy reporting, and API safety. The original MIT permission notice
+and copyright text are retained in the license file above.
+
+Project-specific additions
+--------------------------
+The custom energy reporting/statistics modules, schedule actions,
+other extended behavior, and documentation contain new modifications
+for this project. This NOTICE identifies upstream materials; it does
+not imply that all other code was independently created or that
+original upstream copyrights have been transferred.
+
+The upstream software licenses do not grant rights to use upstream
+trademarks, logos, or names as an indication of sponsorship.

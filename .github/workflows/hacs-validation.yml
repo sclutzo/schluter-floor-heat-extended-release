@@ -1,0 +1,19 @@
+name: HACS integration validation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  validate-hacs:
+    # HACS rejects private repositories; run only after the owner publishes.
+    if: ${{ github.event.repository.private == false }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate HACS integration repository
+        uses: hacs/action@main
+        with:
+          category: integration

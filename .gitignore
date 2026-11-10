@@ -1,0 +1,31 @@
+# Python and local tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.env
+.DS_Store
+
+# Never commit Home Assistant instance files or session credentials
+.secrets*
+secrets.yaml
+configuration.yaml
+*.conf
+*auth*.json
+schluter*cookie*.json
+schluter_debug-*.json
+*.har
+*.tar.gz
+
+# Local Home Assistant state, databases, traces and recovery archives
+/.storage/
+/backups/
+home-assistant_v2.db*
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+*.log
+*.pcap
+*.pcapng
+*.har.gz
