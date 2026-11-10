@@ -4,7 +4,7 @@
   <img src="assets/logo.svg" alt="Schluter Floor Heat Extended — unofficial Home Assistant integration" width="700">
 </p>
 
-> **Unreleased beta candidate — private staging.** This is an independent Home Assistant custom integration for Schluter DITRA-HEAT Wi-Fi thermostats. It is **not** made, endorsed, or supported by Schluter Systems or the Home Assistant project. The repository remains private until final review and explicit maintainer approval.
+> **Public beta source — GitHub release pending.** This is an independent Home Assistant custom integration for Schluter DITRA-HEAT Wi-Fi thermostats. It is **not** made, endorsed, or supported by Schluter Systems or the Home Assistant project. The source repository is public for compatibility validation; a versioned beta release and Marketplace installation still require testing.
 
 **Version:** `1.1.0b1`  
 **Minimum tested Home Assistant:** `2026.11.0`  
@@ -50,6 +50,6 @@ Live beta testing on Home Assistant 2026.11 confirmed UI account setup, both the
 
 This project contains modifications based on the Apache-2.0 Home Assistant Core Schluter integration and the MIT-licensed `py-schluter` project. See [LICENSE](LICENSE), [NOTICE](NOTICE), and [LICENSES/](LICENSES/). Original project contributions use Apache-2.0. The separate artwork is an unofficial project design. Development and documentation included AI-assisted work; the maintainer remains responsible for reviewing, testing, licensing, and releasing the integration.
 
-Use the [Issues](../../issues) page for reproducible reports after the repository becomes public. Include Home Assistant and integration version, redacted relevant logs and reproduction steps. **Never include secrets or serial numbers.**
+Use the [Issues](../../issues) page for reproducible reports. Include Home Assistant and integration version, redacted relevant logs and reproduction steps. **Never include secrets or serial numbers.**
 
-*There is currently no official catalog listing or stable public release. Publication will be authorized separately.*
+*There is currently no official Marketplace catalog listing or published GitHub beta release. The intended initial test tag is `1.1.0b1`, matching `manifest.json`.*
