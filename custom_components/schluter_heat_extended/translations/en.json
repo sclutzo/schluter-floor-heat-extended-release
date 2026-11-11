@@ -4,7 +4,7 @@
     "step": {
       "user": {
         "title": "Connect Schluter account",
-        "description": "Sign in to your Schluter DITRA-HEAT Wi-Fi account. IMPORTANT: After setup, open Settings → Devices & services → Schluter Floor Heat Extended → Configure and select the correct timezone for EACH thermostat. Hourly energy tracking requires this step; it is not completed by signing in.",
+        "description": "Sign in to your Schluter DITRA-HEAT Wi-Fi account. Next, setup will require you to confirm the timezone for each discovered thermostat before installation finishes.",
         "data": {
           "username": "Email",
           "password": "Password"
@@ -16,12 +16,21 @@
         "data": {
           "password": "New password"
         }
+      },
+      "initial_timezone": {
+        "title": "Confirm thermostat timezone",
+        "description": "Thermostat {device_number} of {device_count}: {device_name}. Confirm its IANA timezone to enable safe hourly energy tracking. The Home Assistant timezone is suggested; verify it matches this thermostat.",
+        "data": {
+          "time_zone": "Thermostat timezone"
+        }
       }
     },
     "error": {
       "cannot_connect": "Could not connect to Schluter. Try again later.",
       "invalid_auth": "Schluter rejected these credentials.",
-      "invalid_account": "Enter a valid account email address."
+      "invalid_account": "Enter a valid account email address.",
+      "invalid_timezone": "Choose a valid IANA timezone.",
+      "devices_unavailable": "No thermostats were discovered. Check the account and try again."
     },
     "abort": {
       "yaml_active": "This integration is already active through YAML. The UI migration is not yet complete; keep using the existing setup.",
