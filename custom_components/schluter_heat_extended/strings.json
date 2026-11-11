@@ -4,7 +4,7 @@
     "step": {
       "user": {
         "title": "Connect Schluter account",
-        "description": "Sign in to your Schluter DITRA-HEAT Wi-Fi account. Thermostat timezones are configured separately after setup.",
+        "description": "Sign in to your Schluter DITRA-HEAT Wi-Fi account. IMPORTANT: After setup, open Settings → Devices & services → Schluter Floor Heat Extended → Configure and select the correct timezone for EACH thermostat. Hourly energy tracking requires this step; it is not completed by signing in.",
         "data": {
           "username": "Email",
           "password": "Password"
@@ -34,14 +34,14 @@
     "step": {
       "init": {
         "title": "Choose thermostat",
-        "description": "Select the thermostat whose timezone you want to configure.",
+        "description": "Required for hourly energy tracking: select each thermostat in turn and save its timezone. Repeat Configure for any other thermostats.",
         "data": {
           "thermostat": "Thermostat"
         }
       },
       "timezone": {
         "title": "Set thermostat timezone",
-        "description": "Select the IANA timezone for {device_name}. This choice affects the interpretation of future hourly energy reports, so existing history will not be silently remapped.",
+        "description": "Confirm the IANA timezone for {device_name}. Home Assistant's timezone is suggested but must be explicitly saved for this thermostat before hourly energy tracking can begin. Existing history will not be silently remapped.",
         "data": {
           "time_zone": "Thermostat timezone"
         }
