@@ -1,8 +1,6 @@
 # Schluter Floor Heat Extended 1.1.0b2 — Beta 2
 
-**Unreleased candidate notes.** Publish as a GitHub **pre-release** with tag
-`1.1.0b2` (no `v` prefix), pointing to the validated release commit.
-The manifest version must exactly match the tag.
+**Status:** Unofficial GitHub pre-release (`1.1.0b2`), available for testing through Home Assistant Marketplace as a custom repository. Not listed in the official Marketplace catalog.
 
 ## New since 1.1.0b1
 
