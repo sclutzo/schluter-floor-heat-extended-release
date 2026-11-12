@@ -40,6 +40,7 @@ def make_flow(*, login_status="ok", discover_status="ok", devices=None):
     environment = {
         "Any": Any,
         "ConfigFlowResult": dict,
+        "DOMAIN": "schluter_heat_extended",
         "CONF_USERNAME": "username",
         "CONF_PASSWORD": "password",
         "account_unique_id": lambda email: email.strip().lower(),
