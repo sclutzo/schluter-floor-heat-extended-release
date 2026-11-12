@@ -1,0 +1,43 @@
+name: Publish beta 1.1.0b2 once
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-beta-1.1.0b2.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    if: github.repository == 'sclutzo/schluter-floor-heat-extended-release'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Verify exact version and run offline checks
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          m = json.loads(Path('custom_components/schluter_heat_extended/manifest.json').read_text())
+          assert m['version'] == '1.1.0b2', m['version']
+          assert Path('RELEASE_NOTES_1.1.0b2.md').is_file()
+          PY
+          python -m pip install requests PyYAML
+          python -m compileall -q custom_components/schluter_heat_extended
+          python -m unittest discover -s tests -p 'test_*.py'
+      - name: Publish beta pre-release (idempotent)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view 1.1.0b2 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'Beta 1.1.0b2 already exists; no changes made.'
+            exit 0
+          fi
+          gh release create 1.1.0b2 \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title 'Schluter Floor Heat Extended 1.1.0b2 (Beta 2)' \
+            --notes-file RELEASE_NOTES_1.1.0b2.md \
+            --prerelease
