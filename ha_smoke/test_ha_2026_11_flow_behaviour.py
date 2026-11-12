@@ -38,22 +38,43 @@ class ConfigFlowBehaviourTest(unittest.IsolatedAsyncioTestCase):
 
     async def test_login_form_validates_without_leaking_credentials(self):
         flow = flow_mod.SchluterHeatExtendedConfigFlow()
-        fake_executor = AsyncMock(return_value="ok")
-        flow.hass = SimpleNamespace(data={}, async_add_executor_job=fake_executor)
+        async def executor(fn, *args):
+            return fn(*args)
+        flow.hass = SimpleNamespace(
+            data={},
+            config=SimpleNamespace(time_zone="America/New_York"),
+            async_add_executor_job=executor,
+        )
         user_input = {
             "username": "Name@Example.ORG", "password": "test-PRIVATE-credential",
         }
+        account = runtime_mod.ConnectedAccount(
+            api=Mock(), device_names_by_serial={"000111": "Bathroom"}
+        )
         with (
             patch.object(flow, "_async_current_entries", return_value=[]),
             patch.object(flow, "async_set_unique_id", new_callable=AsyncMock) as set_id,
             patch.object(flow, "_abort_if_unique_id_configured"),
+            patch.object(flow_mod, "check_login", return_value="ok") as login,
+            patch.object(flow_mod, "connect_account", return_value=("ok", account)) as connect,
+            patch.object(flow_mod, "close_account") as close,
         ):
             result = await flow.async_step_user(user_input)
-        self.assertEqual(result["type"].value, "create_entry")
-        self.assertEqual(result["data"]["username"], user_input["username"])
-        self.assertEqual(result["data"]["password"], user_input["password"])
+            self.assertEqual(result["type"].value, "form")
+            self.assertEqual(result["step_id"], "initial_timezone")
+            self.assertNotIn(user_input["password"], str(result))
+            finished = await flow.async_step_initial_timezone(
+                {"time_zone": "America/New_York"}
+            )
+        self.assertEqual(finished["type"].value, "create_entry")
+        self.assertEqual(finished["data"]["username"], user_input["username"])
+        self.assertEqual(finished["data"]["password"], user_input["password"])
+        self.assertEqual(finished["options"]["time_zones"],
+                         {"000111": "America/New_York"})
         set_id.assert_awaited_once_with("name@example.org")
-        fake_executor.assert_awaited_once()
+        login.assert_called_once()
+        connect.assert_called_once()
+        close.assert_called_once_with(account.api)
 
     async def test_no_login_on_bad_email(self):
         flow = flow_mod.SchluterHeatExtendedConfigFlow()
