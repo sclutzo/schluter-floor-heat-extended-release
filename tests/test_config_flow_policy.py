@@ -98,7 +98,7 @@ class ConfigFlowPolicyTest(unittest.TestCase):
         self.assertNotIn("async_add_external_statistics", flow)
         manifest = json.loads((COMPONENT / "manifest.json").read_text())
         self.assertTrue(manifest.get("config_flow", False))
-        self.assertEqual(manifest["version"], "1.1.0b1")
+        self.assertEqual(manifest["version"], "1.1.0b2")
 
     def test_ui_translation_keys_exist_and_match(self):
         strings = json.loads((COMPONENT / "strings.json").read_text())
@@ -106,6 +106,7 @@ class ConfigFlowPolicyTest(unittest.TestCase):
         self.assertEqual(strings, translations)
         self.assertIn("reauth_confirm", strings["config"]["step"])
         self.assertIn("timezone", strings["options"]["step"])
+        self.assertIn("initial_timezone", strings["config"]["step"])
 
 
 if __name__ == "__main__":

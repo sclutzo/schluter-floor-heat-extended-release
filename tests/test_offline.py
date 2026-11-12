@@ -166,7 +166,7 @@ class ApiTests(unittest.TestCase):
                 self.assertEqual(svc['target']['entity']['integration'],'schluter_heat_extended')
         m=json.loads((ROOT/'manifest.json').read_text())
         self.assertEqual(m['domain'],'schluter_heat_extended')
-        self.assertEqual(m['version'],'1.1.0b1')
+        self.assertEqual(m['version'],'1.1.0b2')
         self.assertTrue(m['config_flow'])
 
     def test_recorder_query_uses_set_ids(self):
