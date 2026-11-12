@@ -4,16 +4,16 @@
   <img src="assets/logo.svg" alt="Schluter Floor Heat Extended — unofficial Home Assistant integration" width="700">
 </p>
 
-> **Public beta source — GitHub release pending.** This is an independent Home Assistant custom integration for Schluter DITRA-HEAT Wi-Fi thermostats. It is **not** made, endorsed, or supported by Schluter Systems or the Home Assistant project. The source repository is public for compatibility validation; a versioned beta release and Marketplace installation still require testing.
+> **Unofficial beta.** This is an independent Home Assistant custom integration for Schluter DITRA-HEAT Wi-Fi thermostats. It is **not** made, endorsed, or supported by Schluter Systems or the Home Assistant project. Published beta versions can be installed using a Home Assistant Marketplace custom repository; this is not an official Marketplace catalog listing.
 
-**Version:** `1.1.0b1`  
+**Version:** `1.1.0b2`  
 **Minimum tested Home Assistant:** `2026.11.0`  
 **Integration domain:** `schluter_heat_extended`  
 **Current testing:** One physical thermostat, with UI setup and per-device timezone selection. Multi-thermostat installations and other regional timezones have offline test coverage but have not been verified on additional physical devices.
 
 ## Features
 
-- Home Assistant **UI account login** and reauthentication, without a `secrets.yaml` login requirement
+- Home Assistant **UI account login** and reauthentication; initial setup confirms each thermostat's timezone before completing installation, without a `secrets.yaml` login requirement
 - Thermostat climate state, target temperature, heating/idle status and temporary comfort overrides
 - Read and edit full weekly thermostat schedules, with server readback and conflict detection
 - Next scheduled transition and return-to-schedule controls

@@ -1,7 +1,7 @@
 """Home Assistant UI configuration and safe reauthentication for Schluter Extended.
 
-The UI flow is enabled in v1.1.0b1. It blocks legacy YAML duplicates and
-requires explicit per-device IANA timezones for verified energy collection.
+Version 1.1.0b2 asks for per-device timezones during first-time setup.
+The UI flow blocks legacy YAML duplicates and requires verified timezones.
 """
 
 from __future__ import annotations
@@ -89,7 +89,8 @@ class SchluterHeatExtendedConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                         "devices_unavailable" if status == "no_thermostats"
                         else "cannot_connect"
                     )
-                errors["base"] = result
+                else:
+                    errors["base"] = result
 
         return self.async_show_form(
             step_id="user", data_schema=ACCOUNT_SCHEMA, errors=errors

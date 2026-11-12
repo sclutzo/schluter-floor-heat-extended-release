@@ -1,4 +1,4 @@
-# Schluter Floor Heat Extended — v1.1.0b1 release candidate
+# Schluter Floor Heat Extended — v1.1.0b2 release candidate
 
 **Unofficial beta Home Assistant custom integration.** This build was validated
 on Home Assistant 2026.11. It is not affiliated with or supported by Schluter
@@ -12,11 +12,13 @@ Systems or Home Assistant.
    services → Add integration → Schluter Floor Heat Extended**.
 3. Enter your Schluter account email and password in Home Assistant's login
    dialog. **Do not add a `schluter_heat_extended:` username/password block in
-   `configuration.yaml`** for the UI version. It does not require credentials
-   in `secrets.yaml`; the integration also supports UI reauthentication.
-4. In the integration's **Configure** options, select a verified **IANA time
-   zone for each thermostat**. Unverified time zones deliberately pause hourly
-   Recorder imports rather than manufacturing incorrectly timed measurements.
+   `configuration.yaml`** for the UI version; it does not require `secrets.yaml`.
+4. **During initial setup**, confirm the IANA timezone for every discovered
+   thermostat. Home Assistant's timezone is suggested, not applied silently.
+   An entry is created only after every thermostat has an explicitly selected
+   timezone. Existing installations may change a device's zone via **Configure**.
+   Unverified time zones deliberately pause hourly Recorder imports rather
+   than manufacturing incorrectly timed measurements.
 5. Verify the climate entity, schedule readback, and
    `schluter_heat_extended.get_energy_statistics_status`. Restart Home
    Assistant Core and recheck as part of a controlled upgrade.
