@@ -19,7 +19,7 @@ cards:
           pointer-events: none
       - type: custom:bathroom-heat-status
         service_domain: schluter_heat_extended
-        entity: climate.bath_heat_2
+        entity: climate.bath_heat
         field: clock
         compact: true
         style:
@@ -31,7 +31,7 @@ cards:
           color: '#111'
       - type: custom:bathroom-heat-status
         service_domain: schluter_heat_extended
-        entity: climate.bath_heat_2
+        entity: climate.bath_heat
         field: current
         compact: true
         style:
@@ -43,7 +43,7 @@ cards:
           color: '#111'
       - type: custom:bathroom-heat-target
         service_domain: schluter_heat_extended
-        entity: climate.bath_heat_2
+        entity: climate.bath_heat
         style:
           top: 40%
           left: 36%
@@ -60,7 +60,7 @@ cards:
           font-size: var(--bath-heat-action, 11px)
           color: '#111'
       - type: state-label
-        entity: climate.bath_heat_2
+        entity: climate.bath_heat
         attribute: hvac_action
         style:
           top: 56%
@@ -71,7 +71,7 @@ cards:
           color: '#333'
       - type: custom:bathroom-heat-status
         service_domain: schluter_heat_extended
-        entity: climate.bath_heat_2
+        entity: climate.bath_heat
         field: mode
         style:
           top: 50%
@@ -82,7 +82,7 @@ cards:
           color: '#333'
       - type: custom:bathroom-heat-status
         service_domain: schluter_heat_extended
-        entity: climate.bath_heat_2
+        entity: climate.bath_heat
         field: expiration
         compact: true
         style:
@@ -99,7 +99,7 @@ cards:
         tap_action:
           action: fire-dom-event
           bathroom_heat:
-            entity: climate.bath_heat_2
+            entity: climate.bath_heat
             action: step
             step: 1
         style:
@@ -125,7 +125,7 @@ cards:
         tap_action:
           action: fire-dom-event
           bathroom_heat:
-            entity: climate.bath_heat_2
+            entity: climate.bath_heat
             action: step
             step: -1
         style:
@@ -150,7 +150,7 @@ cards:
         tap_action:
           action: fire-dom-event
           bathroom_heat:
-            entity: climate.bath_heat_2
+            entity: climate.bath_heat
             action: adjust
         style:
           top: 65%
@@ -160,7 +160,7 @@ cards:
       - type: conditional
         conditions:
           - condition: state
-            entity: climate.bath_heat_2
+            entity: climate.bath_heat
             attribute: override_active
             state: 'true'
         elements:
@@ -169,7 +169,7 @@ cards:
             tap_action:
               action: fire-dom-event
               bathroom_heat:
-                entity: climate.bath_heat_2
+                entity: climate.bath_heat
                 action: return_to_schedule
             style:
               top: 72%
@@ -183,7 +183,7 @@ cards:
         tap_action:
           action: fire-dom-event
           bathroom_heat:
-            entity: climate.bath_heat_2
+            entity: climate.bath_heat
             action: schedule
         style:
           top: 85%

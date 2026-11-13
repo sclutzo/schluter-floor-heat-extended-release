@@ -27,14 +27,14 @@ and energy viewer v1.0.4. Their package versions are **1.0.23** and **1.0.5**.
 Only the integration service routing/entity checks were generalized. The
 existing production files remain unchanged.
 
-**Important:** The card YAML uses an example entity ID, `climate.bath_heat_2`. Replace **every** occurrence of that ID with the `climate` entity created for your thermostat before adding either card. The examples are not automatically mapped by the integration.
+**Important:** The supplied examples use `climate.bath_heat` (the development VM's actual entity ID). Your Home Assistant installation may use another name: replace **every** `climate.bath_heat` in both card examples with your own thermostat's entity ID. The integration does not remap example cards automatically.
 
 ## Requirements
 
 - Home Assistant 2026.11+ (tested on Home Assistant; older installations may
   also work but have not been verified)
 - The `schluter_heat_extended` integration installed and a working climate
-  entity, e.g. `climate.bath_heat_2` in the supplied example
+  entity, e.g. `climate.bath_heat` in the supplied example
 - **Browser Mod** for the Adjust and Weekly Schedule popups. If Browser Mod is
   not installed/registered in the browser, do not expect those dialogs to open.
 - Fahrenheit-based thermostat control screens; the existing controls present
@@ -54,16 +54,23 @@ existing production files remain unchanged.
    PNGs from the original user's Home Assistant installation. The original
    PNG assets can be used instead by changing the three image URLs in the
    YAML to your existing `/local/*.png` paths.
-3. **Register both JavaScript files as dashboard resources.** Follow the
-   detailed procedure in [Register dashboard resources](#register-dashboard-resources)
-   below. Copying JavaScript into `/config/www/` **does not automatically
-   register it**. Complete this step **before** adding the card.
+3. **Register both JavaScript files as dashboard resources.** Go to
+   **Settings → Dashboards → ⋮ → Resources** (enable **Advanced Mode** in your
+   user profile if Resources is missing). Click **Add resource** once for
+   each of the following exact URL and Type pairs:
+   - URL: `/local/bathroom-heat-controls.js?v=1.0.23` — Type: **JavaScript module**
+   - URL: `/local/bathroom-heat-energy.js?v=1.0.5` — Type: **JavaScript module**
+   Save each resource separately. Use these `/local/` URLs rather than
+   `/config/www/` filesystem paths. **Copying files into `www` does not
+   register them automatically.** If the resource already exists, update its
+   URL rather than adding a duplicate. See [Register dashboard resources](#register-dashboard-resources)
+   for detailed instructions and the YAML alternative.
 4. Fully reload Safari, or clear its cached frontend resources if necessary.
    The resource URLs include versions to avoid stale code.
 5. Open a dashboard, enter edit mode, **Add card → Manual**, and paste the full
    contents of `cards/bathroom-heat-extended.yaml`. For the distributed card example,
    the supplied example uses (replace the climate entity with yours):
-   - `entity: climate.bath_heat_2`
+   - `entity: climate.bath_heat`
    - `service_domain: schluter_heat_extended`
    The `service_domain` must be present on **each** of the card's custom
    status, target and schedule elements because Home Assistant configures them
@@ -275,7 +282,7 @@ are served without authentication.
 3. Paste all the contents of
    `dashboard/cards/bathroom-heat-extended.yaml` into the card editor.
    Save it. This example is already configured for
-   `climate.bath_heat_2` in the sample configuration.
+   `climate.bath_heat` in the sample configuration.
 4. Optionally add a second **Manual** card containing
    `dashboard/cards/bathroom-heat-energy-extended.yaml`.
 5. Confirm the thermostat displays its clock, temperature and **Edit
