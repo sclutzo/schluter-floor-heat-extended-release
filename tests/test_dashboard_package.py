@@ -18,14 +18,14 @@ class DashboardPackageTest(unittest.TestCase):
         controls = [x for x in cfg["elements"] if x["type"].startswith("custom:")]
         self.assertGreaterEqual(len(controls), 5)
         for item in controls:
-            self.assertEqual(item["entity"], "climate.bath_heat_2")
+            self.assertEqual(item["entity"], "climate.bath_heat")
             self.assertEqual(item["service_domain"], "schluter_heat_extended")
         for item in cfg["elements"]:
             if item["type"] == "conditional":
                 for child in item["elements"]:
                     self.assertEqual(
                         child.get("tap_action", {}).get("bathroom_heat", {}).get("entity"),
-                        "climate.bath_heat_2"
+                        "climate.bath_heat"
                     )
 
 
@@ -65,7 +65,7 @@ class DashboardPackageTest(unittest.TestCase):
     def test_read_only_energy_card(self):
         cfg = yaml.safe_load((DASH / "cards/bathroom-heat-energy-extended.yaml").read_text())
         self.assertEqual(cfg["type"], "custom:bathroom-heat-energy")
-        self.assertEqual(cfg["entity"], "climate.bath_heat_2")
+        self.assertEqual(cfg["entity"], "climate.bath_heat")
         self.assertEqual(cfg["service_domain"], "schluter_heat_extended")
 
     def test_controller_domain_is_entity_specific_and_default_remains_original(self):
@@ -105,7 +105,7 @@ class DashboardPackageTest(unittest.TestCase):
 
     def test_documentation_includes_requirements_and_backup(self):
         doc = (DASH / "README.md").read_text()
-        for phrase in ("Browser Mod", "Resources", "climate.bath_heat_2",
+        for phrase in ("Browser Mod", "Resources", "climate.bath_heat",
                        "service_domain: schluter_heat_extended", "rollback"):
             self.assertIn(phrase.lower(), doc.lower())
 

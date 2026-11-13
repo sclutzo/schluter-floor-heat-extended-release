@@ -2,6 +2,6 @@
 # Register /local/bathroom-heat-energy.js?v=1.0.5 as a JavaScript module resource.
 type: custom:bathroom-heat-energy
 service_domain: schluter_heat_extended
-entity: climate.bath_heat_2
+entity: climate.bath_heat
 title: Bathroom Floor Heat Energy
 default_view: day

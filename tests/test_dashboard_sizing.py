@@ -37,7 +37,7 @@ class DashboardSizingTest(unittest.TestCase):
                 ]
                 self.assertTrue(controls)
                 self.assertTrue(all(
-                    item["entity"] == "climate.bath_heat_2"
+                    item["entity"] == "climate.bath_heat"
                     and item["service_domain"] == "schluter_heat_extended"
                     for item in controls
                 ))
@@ -76,7 +76,7 @@ class DashboardSizingTest(unittest.TestCase):
                 self.assertEqual(schedule_button["style"]["top"], "85%")
                 self.assertEqual(
                     schedule_button["tap_action"]["bathroom_heat"],
-                    {"entity": "climate.bath_heat_2", "action": "schedule"}
+                    {"entity": "climate.bath_heat", "action": "schedule"}
                 )
                 self.assertEqual(schedule_button["tap_action"]["action"],
                                  "fire-dom-event")
